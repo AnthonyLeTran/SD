@@ -1,0 +1,6 @@
+1,Cave,It is really dark in here,Does not seem like a place i want to stay.,***,false,0,2,4,0
+2,Swamp,There are alligators roaming around,They look hungry...,***,false,0,3,5,1
+3,Forest,Seems eerie,This place may be haunted.,***,false,0,0,6,2
+4,Building,No one is here.,They may have gone home for the day.,***,false,1,5,0,0
+5,Bar,You can help yourself to a drink after making it here,Might be time to go home soon,***,false,2,6,0,4
+6,Home,Now you can finally relax,unless you decide to leave.,***,false,3,0,0,5

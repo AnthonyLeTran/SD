@@ -1,0 +1,2 @@
+Riddle,Who created this game?,Anthony Tran,3,false,3
+Question,What day is today?,Tuesday,2,false,5
