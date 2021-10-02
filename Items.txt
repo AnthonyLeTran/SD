@@ -1,3 +1,3 @@
-Beer, It is an IPA, 5
-Stick, good for poking, 2
-Car keys, Good for avoiding this whole mess again, 6
+1,beer,It is an IPA
+2,stick,Good for poking
+3,car key,Good for avoiding this whole mess again

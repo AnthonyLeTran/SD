@@ -18,26 +18,29 @@ public class Main {
     private static int nextRoomID;
     private static ArrayList<Puzzles> puzzles;
     private static Puzzles currentPuzzles;
+    private static ArrayList<Items> items;
+    private static Items roomItems;
+    private static ArrayList<Player> playerInventory;
     static Scanner keyboard = new Scanner(System.in); //User controller
 
     public static void main(String[] args) {
 
         rooms = Input.getRooms();
+//        System.out.println(rooms);
         puzzles = PuzzleInput.getPuzzles();
         for (int i = 0; i < puzzles.size(); i++) {
             Rooms room = rooms.get(puzzles.get(i).getPuzzleRoomID() - 1);
             room.setPuzzle(puzzles.get(i));
         }
-        //System.out.println(puzzles);
-        //System.out.println(rooms);
-        System.out.println("Welcome to Mini Game 1");
+
+//        System.out.println(rooms);
+//        System.out.println(items);
+
+
+        System.out.println("Welcome to the Mini Game");
         currentRoom = rooms.get(0); //starting point
         nextRoomID = 1;
-       // currentPuzzles = puzzles.get(0);
-        //roomPuzzle = puzzles.get(0);
         displayCurrentRoom();
-        //displayPuzzle();
-        //endGame();
         do {
             System.out.println("Which direction would you like to go? North, East, South, or West?");
             System.out.print(">");
@@ -45,15 +48,17 @@ public class Main {
             processCommand(command);
             displayCurrentRoom();
             displayPuzzle();
+            displayItem();
+//            pickupItems();
         }
         while (gameFlag == true);
     }
 
 
-
     public static void processCommand(String command) { //Directions
         command = command.toLowerCase();
         HashMap<String, Integer> neighbors = currentRoom.getNeighbors();
+        ArrayList<Items> roomInventory = currentRoom.getInventory();
         if (command.compareTo("north") == 0 || command.compareTo("n") == 0) {
             nextRoomID = neighbors.get("north");
         } else if (command.compareTo("east") == 0 || command.compareTo("e") == 0) {
@@ -92,6 +97,7 @@ public class Main {
             }
         }
     }
+
     public static void displayPuzzle() {
         if (currentRoom.getPuzzle().isSolved() == false) {
             System.out.println("There is a puzzle in this room");
@@ -109,14 +115,27 @@ public class Main {
                 attempts--;
                 if (attempts > 0) {
                     System.out.println("Your answer was incorrect. You have " + attempts + " number of attempts left");
-                }else {
+                } else {
                     break;
                 }
 
-            }while (attempts > 0);
+            } while (attempts > 0);
             System.out.println("You are out of attempts");
         }
 
     }
 
+    private static void displayItem() {
+        if (currentRoom.getRoomInventory().size() != 0) {
+            ArrayList<Items> roomInventory = currentRoom.getInventory();
+            for (int i = 0; i < roomInventory.size(); i++) {
+                System.out.println("There is a " + roomInventory.get(i).getItemName() + " in this room");
+            }
+            System.out.print(">");
+        }
+    }
+    private static void pickupItems() {
+        ArrayList<Items> roomInventory = currentRoom.getRoomInventory();
+        currentRoom.getRoomInventory().remove(items);
+    }
 }

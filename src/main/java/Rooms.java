@@ -15,10 +15,13 @@ public class Rooms {
     private boolean visited;
     private HashMap<String, Integer> neighbors;
     private Puzzles puzzle;
-    public Rooms(){
+    private ArrayList<Items> roomInventory;
+
+    public Rooms() {
         neighbors = new HashMap<>();
         puzzle = new Puzzles();
         puzzle.setSolved(true);
+        roomInventory = new ArrayList<>();
     }
 
     public int getRoomID() {
@@ -69,6 +72,14 @@ public class Rooms {
         this.puzzle = puzzle;
     }
 
+    public ArrayList<Items> getRoomInventory() {
+        return roomInventory;
+    }
+
+    public void setRoomInventory(ArrayList<Items> roomInventory) {
+        this.roomInventory = roomInventory;
+    }
+
     @Override
     public String toString() {
         return "Rooms{" +
@@ -78,6 +89,11 @@ public class Rooms {
                 ", visited=" + visited +
                 ", neighbors=" + neighbors +
                 ", puzzle=" + puzzle +
+                ", roomInventory=" + roomInventory +
                 '}';
+    }
+
+    public ArrayList<Items> getInventory() {
+        return roomInventory;
     }
 }

@@ -8,6 +8,7 @@
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -18,7 +19,7 @@ public class Input {
 
             List<String> lines = FileUtils.readLines(new File("Rooms.txt"), "UTF-8");
             //System.out.println(lines);
-
+            ArrayList<Items> items = ItemInput.getItems();
             for (int i = 0; i < lines.size(); i++) {
                 String line = lines.get(i);
                 Rooms room = new Rooms();
@@ -34,7 +35,6 @@ public class Input {
                    str1 = roomdata[j];
 
                 room.setRoomName(roomName);
-               // j++;
 
                 str1 = roomdata[j];
                 String str = roomdata[j];
@@ -57,11 +57,19 @@ public class Input {
                 j++;
                 neighbors.put("west", Integer.parseInt(roomdata[j]));
                 room.setNeighbors(neighbors);
+                j++;
+
+                int itemID = Integer.parseInt(roomdata[j]);
+                if (itemID > 0) {
+                    room.getRoomInventory().add(items.get(itemID - 1));
+                }
                 rooms.add(room);
             }
+        }catch (FileNotFoundException e) {
+            System.out.println("rooms.txt not found");
 
         }catch (Exception e) {
-            System.out.println("file not found");
+            e.printStackTrace();
         }
         return rooms;
 
