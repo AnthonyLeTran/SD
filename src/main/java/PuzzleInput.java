@@ -30,6 +30,7 @@ public class PuzzleInput {
                 puzzle.setSolved(Boolean.parseBoolean(puzzleData[j]));
                 j++;
                 puzzle.setPuzzleRoomID(Integer.parseInt(puzzleData[j]));
+                puzzles.add(puzzle);
 
 
             }

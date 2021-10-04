@@ -38,6 +38,7 @@ public class Main {
         currentRoom = rooms.get(0); //starting point
         nextRoomID = 1;
         displayCurrentRoom();
+        displayPuzzle();
         do {
             System.out.println("Which direction would you like to go? North, East, South, or West?");
             System.out.print(">");
