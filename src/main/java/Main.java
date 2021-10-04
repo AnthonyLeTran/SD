@@ -21,6 +21,8 @@ public class Main {
     private static ArrayList<Items> items;
     private static Items roomItems;
     private static ArrayList<Player> playerInventory;
+    private static Rooms currentItems;
+    private static Player player;
     static Scanner keyboard = new Scanner(System.in); //User controller
 
     public static void main(String[] args) {
@@ -32,6 +34,7 @@ public class Main {
             Rooms room = rooms.get(puzzles.get(i).getPuzzleRoomID() - 1);
             room.setPuzzle(puzzles.get(i));
         }
+        player = new Player();
 
 //        System.out.println(rooms);
 //        System.out.println(items);
@@ -48,7 +51,7 @@ public class Main {
             processCommand(command);
             displayCurrentRoom();
             displayPuzzle();
-            displayItem();
+//            displayItem();
 //            pickupItems();
         }
         while (gameFlag == true);
@@ -57,6 +60,9 @@ public class Main {
 
     public static void processCommand(String command) { //Directions
         command = command.toLowerCase();
+        String[] commandWords = command.split(" ");
+        if (commandWords.length == 1) {
+
         HashMap<String, Integer> neighbors = currentRoom.getNeighbors();
         ArrayList<Items> roomInventory = currentRoom.getInventory();
         if (command.compareTo("north") == 0 || command.compareTo("n") == 0) {
@@ -70,8 +76,75 @@ public class Main {
         } else if (command.compareTo("quit") == 0) {
             System.out.println("You have quit the game");
             gameFlag = false;
+
+        } else if (command.compareTo("explore") == 0) {
+            if (roomInventory.size() > 0) {
+                System.out.println("The items in the room are ");
+                for (int i = 0; i < roomInventory.size(); i++) {
+                    System.out.println(roomInventory.get(i).getItemName());
+                }
+            }else{
+                System.out.println("There are no items in the room.");
+            }
+        }else if (command.compareTo("inventory") == 0) {
+            ArrayList<Items> playerInventory = player.getPlayerInventory();
+            if (playerInventory.size() > 0) {
+                System.out.println("The player inventory has the following items ");
+
+                for (int i = 0; i < playerInventory.size(); i++) {
+                 System.out.println(playerInventory.get(i).getItemName());
+                 }
+            }else {
+                System.out.println("You have not picked up any items yet!");
+            }
+
         } else {
+
             System.out.println("Invalid command");
+        }
+        }
+        else if (commandWords.length > 1) {
+            if (commandWords[0].compareTo("pickup") == 0) {
+                ArrayList<Items> roomInventory = currentRoom.getRoomInventory();
+                for (int i = 0; i < roomInventory.size(); i++) {
+                    if (commandWords[1].compareTo(roomInventory.get(i).getItemName()) == 0) {
+                        player.getPlayerInventory().add(roomInventory.get(i));
+                        roomInventory.remove(i);
+                        System.out.println("Item has successfully been added to the player inventory");
+                        return;
+                    }
+                }
+                System.out.println("The item does not exist in this room");
+
+            }else
+            if (commandWords[0].compareTo("drop") == 0) {
+                ArrayList<Items> roomInventory = currentRoom.getRoomInventory();
+                ArrayList<Items> playerInventory = player.getPlayerInventory();
+                for (int i = 0; i < playerInventory.size(); i++) {
+                    if (commandWords[1].compareTo(player.getPlayerInventory().get(i).getItemName()) == 0) {
+                        currentRoom.getRoomInventory().add(playerInventory.get(i));
+                        playerInventory.remove(i);
+                        System.out.println("Item has been dropped successfully from the player inventory and placed in the " + currentRoom.getRoomName().get(0));
+                    }
+                }
+
+            }else
+            if (commandWords[0].compareTo("inspect") == 0) {
+                ArrayList<Items> roomInventory = currentRoom.getRoomInventory();
+                ArrayList<Items> playerInventory = player.getPlayerInventory();
+                for (int i = 0; i < playerInventory.size(); i++) {
+                    if (commandWords[1].compareTo(player.getPlayerInventory().get(i).getItemName()) == 0) {
+                        System.out.println(playerInventory.get(i).getItemDescription());
+                        return;
+                    }
+                }
+                System.out.println("You have not picked up the item yet!");
+
+            }
+         else {
+
+            System.out.println("Invalid command");
+        }
         }
     }
 
@@ -125,17 +198,4 @@ public class Main {
 
     }
 
-    private static void displayItem() {
-        if (currentRoom.getRoomInventory().size() != 0) {
-            ArrayList<Items> roomInventory = currentRoom.getInventory();
-            for (int i = 0; i < roomInventory.size(); i++) {
-                System.out.println("There is a " + roomInventory.get(i).getItemName() + " in this room");
-            }
-            System.out.print(">");
-        }
-    }
-    private static void pickupItems() {
-        ArrayList<Items> roomInventory = currentRoom.getRoomInventory();
-        currentRoom.getRoomInventory().remove(items);
-    }
 }

@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
 public class Player {
-private ArrayList<String> playerInventory;
+private ArrayList<Items> playerInventory;
+public Player() {
+    playerInventory = new ArrayList<>();
+}
 
-    public ArrayList<String> getPlayerInventory() {
+    public ArrayList<Items> getPlayerInventory() {
         return playerInventory;
     }
 
-    public void setPlayerInventory(ArrayList<String> playerInventory) {
+    public void setPlayerInventory(ArrayList<Items> playerInventory) {
         this.playerInventory = playerInventory;
     }
 
