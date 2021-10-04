@@ -28,18 +28,12 @@ public class Main {
     public static void main(String[] args) {
 
         rooms = Input.getRooms();
-//        System.out.println(rooms);
         puzzles = PuzzleInput.getPuzzles();
         for (int i = 0; i < puzzles.size(); i++) {
             Rooms room = rooms.get(puzzles.get(i).getPuzzleRoomID() - 1);
             room.setPuzzle(puzzles.get(i));
         }
         player = new Player();
-
-//        System.out.println(rooms);
-//        System.out.println(items);
-
-
         System.out.println("Welcome to the Mini Game");
         currentRoom = rooms.get(0); //starting point
         nextRoomID = 1;
@@ -51,18 +45,14 @@ public class Main {
             processCommand(command);
             displayCurrentRoom();
             displayPuzzle();
-//            displayItem();
-//            pickupItems();
         }
         while (gameFlag == true);
     }
 
-
-    public static void processCommand(String command) { //Directions
+    public static void processCommand(String command) {//Directions
         command = command.toLowerCase();
         String[] commandWords = command.split(" ");
         if (commandWords.length == 1) {
-
         HashMap<String, Integer> neighbors = currentRoom.getNeighbors();
         ArrayList<Items> roomInventory = currentRoom.getInventory();
         if (command.compareTo("north") == 0 || command.compareTo("n") == 0) {
@@ -76,7 +66,6 @@ public class Main {
         } else if (command.compareTo("quit") == 0) {
             System.out.println("You have quit the game");
             gameFlag = false;
-
         } else if (command.compareTo("explore") == 0) {
             if (roomInventory.size() > 0) {
                 System.out.println("The items in the room are ");
@@ -97,9 +86,7 @@ public class Main {
             }else {
                 System.out.println("You have not picked up any items yet!");
             }
-
         } else {
-
             System.out.println("Invalid command");
         }
         }
@@ -124,7 +111,8 @@ public class Main {
                     if (commandWords[1].compareTo(player.getPlayerInventory().get(i).getItemName()) == 0) {
                         currentRoom.getRoomInventory().add(playerInventory.get(i));
                         playerInventory.remove(i);
-                        System.out.println("Item has been dropped successfully from the player inventory and placed in the " + currentRoom.getRoomName().get(0));
+                        System.out.println("Item has been dropped successfully from the player inventory and placed in the "
+                                + currentRoom.getRoomName().get(0));
                     }
                 }
 
