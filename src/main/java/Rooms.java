@@ -16,12 +16,14 @@ public class Rooms {
     private HashMap<String, Integer> neighbors;
     private Puzzles puzzle;
     private ArrayList<Items> roomInventory;
+    private Monster monster;
 
     public Rooms() {
         neighbors = new HashMap<>();
         puzzle = new Puzzles();
         puzzle.setSolved(true);
         roomInventory = new ArrayList<>();
+        monster = new Monster();
     }
 
     public int getRoomID() {
@@ -80,6 +82,14 @@ public class Rooms {
         this.roomInventory = roomInventory;
     }
 
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
+
     @Override
     public String toString() {
         return "Rooms{" +
@@ -90,6 +100,7 @@ public class Rooms {
                 ", neighbors=" + neighbors +
                 ", puzzle=" + puzzle +
                 ", roomInventory=" + roomInventory +
+                ", monster=" + monster +
                 '}';
     }
 

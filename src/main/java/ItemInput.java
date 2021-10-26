@@ -22,6 +22,10 @@ public class ItemInput {
                 item.setItemName(itemData[j]);
                 j++;
                 item.setItemDescription(itemData[j]);
+                j++;
+                item.setItemType(itemData[j]);
+                j++;
+                item.setItemEffect(itemData[j]);
                 items.add(item);
 
             }

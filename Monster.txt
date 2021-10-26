@@ -1,0 +1,1 @@
+1,Wolf,The wolf appears malnourished, and can probably be easily slain.,10,50,false,2

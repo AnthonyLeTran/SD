@@ -1,3 +1,3 @@
-1,beer,It is an IPA
-2,stick,Good for poking
-3,key,Good for avoiding this whole mess again
+1,beer,It is an IPA,consumable,10
+2,stick,Good for poking,equip,10
+3,key,Good for avoiding this whole mess again,consumable,10
